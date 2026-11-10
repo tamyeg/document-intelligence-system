@@ -365,6 +365,48 @@ This project provided practical experience in:
 - Managing processing states and error handling.
 - Configuring cloud service credentials through environment variables.
 
+
+
+## Results and Demonstration
+
+The project demonstrates document text extraction using Azure AI Document Intelligence, REST API communication, and asynchronous processing through a gRPC-based service.
+
+### 1. REST API Interface
+
+FastAPI provides an interactive Swagger interface for testing document analysis and job processing endpoints.
+
+![FastAPI Swagger Interface](images/swagger-api.png)
+
+### 2. Document Text Extraction
+
+Documents in PDF, JPG, or PNG format can be submitted through the `/analyze` endpoint.
+
+The application uses Azure AI Document Intelligence with the `prebuilt-read` model to extract text and return it in JSON format.
+
+![Document Text Extraction](images/document-extraction.png)
+
+### 3. Asynchronous Job Submission
+
+Documents submitted through the `/jobs` endpoint are added to an asynchronous processing queue.
+
+Each submission receives a unique request ID, allowing the processing status to be retrieved separately.
+
+![Asynchronous Job Submission](images/job-submission.png)
+
+### 4. Document Processing Results
+
+The `/jobs/{request_id}` endpoint provides information about the submitted job, including its status, filename, extracted text, and any processing errors.
+
+![Completed Document Processing](images/job-completed.png)
+
+### 5. gRPC Service
+
+A separate gRPC server handles document processing requests sent by the FastAPI background worker.
+
+The server communicates with Azure AI Document Intelligence and returns the extracted text and processing status to the application.
+
+![gRPC Processing Server](images/grpc-server.png)
+
 ## Author
 
 **Tamara Yegorova**
